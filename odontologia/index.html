@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clínica Sorrir Bem — Odontologia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --azul:        #1a7fc1;
+      --azul-escuro: #0d5a8a;
+      --azul-claro:  #e8f4fd;
+      --ciano:       #00b4cc;
+      --verde:       #00c896;
+      --escuro:      #0a2a3f;
+      --texto:       #2c4a5e;
+      --bg:          #f0f8ff;
+      --branco:      #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--texto);
+      overflow-x: hidden;
+    }
+
+    /* ── FAIXA DEMO ── */
+    .faixa-demo {
+      background: linear-gradient(135deg, var(--escuro), #0a3a5f);
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-size: 0.8rem;
+    }
+
+    .faixa-demo span { color: #80e0ff; font-weight: 600; }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 6%;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(26,127,193,0.1);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--azul-escuro);
+      font-weight: 700;
+    }
+
+    .logo span { color: var(--ciano); }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+
+    nav ul a {
+      text-decoration: none;
+      color: var(--texto);
+      font-size: 0.86rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--azul); }
+
+    .btn-nav {
+      background: var(--azul);
+      color: white !important;
+      padding: 10px 22px;
+      border-radius: 25px;
+      transition: background 0.2s !important;
+    }
+
+    .btn-nav:hover { background: var(--azul-escuro) !important; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      padding: 70px 6% 60px;
+      background: linear-gradient(135deg, #eaf6ff 0%, #f0fffe 50%, #eaf6ff 100%);
+      gap: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(26,127,193,0.08), transparent 70%);
+      top: -200px; right: -150px;
+    }
+
+    .hero-content {
+      flex: 1;
+      max-width: 580px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--azul-claro);
+      color: var(--azul);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 7px 16px;
+      border-radius: 20px;
+      margin-bottom: 22px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+      color: var(--escuro);
+      line-height: 1.18;
+      margin-bottom: 20px;
+    }
+
+    .hero-content h1 em {
+      font-style: normal;
+      color: var(--azul);
+    }
+
+    .hero-content p {
+      font-size: 1rem;
+      color: #4a6a7e;
+      line-height: 1.72;
+      margin-bottom: 36px;
+    }
+
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--azul), var(--azul-escuro));
+      color: white;
+      padding: 14px 30px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 8px 25px rgba(26,127,193,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(26,127,193,0.5);
+    }
+
+    .btn-secondary {
+      border: 2px solid var(--azul);
+      color: var(--azul);
+      padding: 12px 26px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover { background: var(--azul); color: white; }
+
+    .hero-credenciais {
+      display: flex;
+      gap: 36px;
+      margin-top: 44px;
+    }
+
+    .cred-item strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      color: var(--azul);
+    }
+
+    .cred-item span {
+      font-size: 0.8rem;
+      color: #6a8aa0;
+    }
+
+    .hero-visual {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-card {
+      background: white;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(26,127,193,0.18);
+      max-width: 300px;
+      width: 100%;
+    }
+
+    .hero-icon-big {
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(135deg, var(--azul-claro), #e0f8ff);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      margin-bottom: 18px;
+    }
+
+    .hero-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--escuro);
+      margin-bottom: 6px;
+    }
+
+    .hero-card p {
+      font-size: 0.82rem;
+      color: #6a8aa0;
+      margin-bottom: 14px;
+    }
+
+    .disponivel {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #e8faf4;
+      color: #00a878;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    .dot-verde {
+      width: 8px; height: 8px;
+      background: #00c896;
+      border-radius: 50%;
+      animation: pulsar 1.5s infinite;
+    }
+
+    @keyframes pulsar {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%       { transform: scale(1.3); opacity: 0.7; }
+    }
+
+    /* ── DIFERENCIAIS ── */
+    #diferenciais {
+      padding: 70px 6%;
+      background: white;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: var(--azul-claro);
+      color: var(--azul);
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+      color: var(--escuro);
+      margin-bottom: 10px;
+    }
+
+    .section-header p {
+      color: #6a8aa0;
+      font-size: 0.96rem;
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    .grid-diferenciais {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 22px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .card-diferencial {
+      background: var(--bg);
+      border-radius: 18px;
+      padding: 28px 22px;
+      text-align: center;
+      border: 1px solid rgba(26,127,193,0.1);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .card-diferencial:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 35px rgba(26,127,193,0.15);
+    }
+
+    .icone-dif {
+      font-size: 2.2rem;
+      margin-bottom: 14px;
+    }
+
+    .card-diferencial h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--escuro);
+      margin-bottom: 8px;
+    }
+
+    .card-diferencial p {
+      font-size: 0.82rem;
+      color: #6a8aa0;
+      line-height: 1.6;
+    }
+
+    /* ── ESPECIALIDADES ── */
+    #especialidades {
+      padding: 90px 6%;
+      background: var(--bg);
+    }
+
+    .grid-especialidades {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card-especialidade {
+      background: white;
+      border-radius: 20px;
+      padding: 28px 22px;
+      transition: transform 0.25s, box-shadow 0.25s;
+      border-left: 4px solid var(--azul);
+    }
+
+    .card-especialidade:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(26,127,193,0.15);
+    }
+
+    .esp-icone {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .card-especialidade h3 {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--escuro);
+      margin-bottom: 8px;
+    }
+
+    .card-especialidade p {
+      font-size: 0.82rem;
+      color: #6a8aa0;
+      line-height: 1.62;
+      margin-bottom: 14px;
+    }
+
+    .preco-esp {
+      font-size: 0.88rem;
+      color: var(--azul);
+      font-weight: 600;
+    }
+
+    /* ── EQUIPE ── */
+    #equipe {
+      padding: 90px 6%;
+      background: white;
+    }
+
+    .grid-equipe {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 26px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .card-dr {
+      background: var(--bg);
+      border-radius: 20px;
+      padding: 28px 20px;
+      text-align: center;
+      transition: transform 0.25s;
+    }
+
+    .card-dr:hover { transform: translateY(-5px); }
+
+    .foto-dr {
+      width: 88px; height: 88px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--azul), var(--ciano));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      margin: 0 auto 16px;
+    }
+
+    .card-dr h3 {
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: var(--escuro);
+      margin-bottom: 4px;
+    }
+
+    .cargo-dr {
+      font-size: 0.8rem;
+      color: var(--azul);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .cro-dr {
+      font-size: 0.74rem;
+      color: #8aaaaee;
+    }
+
+    /* ── DEPOIMENTOS ── */
+    #depoimentos {
+      padding: 90px 6%;
+      background: var(--bg);
+    }
+
+    .grid-depoimentos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 22px;
+      max-width: 950px;
+      margin: 0 auto;
+    }
+
+    .card-dep {
+      background: white;
+      border-radius: 18px;
+      padding: 26px;
+      box-shadow: 0 4px 18px rgba(26,127,193,0.07);
+    }
+
+    .dep-estrelas { color: #f59e0b; margin-bottom: 10px; font-size: 0.95rem; }
+
+    .dep-texto {
+      font-size: 0.86rem;
+      color: #4a6a7e;
+      line-height: 1.68;
+      font-style: italic;
+      margin-bottom: 18px;
+    }
+
+    .dep-autor {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar-dep {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--azul-claro), #d0f0ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .dep-nome strong { display: block; font-size: 0.86rem; color: var(--escuro); }
+    .dep-nome span   { font-size: 0.76rem; color: #8aabbb; }
+
+    /* ── CONTATO ── */
+    #contato {
+      padding: 90px 6%;
+      background: linear-gradient(135deg, var(--azul-escuro), #083d60);
+      color: white;
+      text-align: center;
+    }
+
+    #contato h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      margin-bottom: 14px;
+    }
+
+    #contato p {
+      font-size: 1rem;
+      opacity: 0.82;
+      max-width: 480px;
+      margin: 0 auto 36px;
+      line-height: 1.65;
+    }
+
+    .contato-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    .btn-wpp {
+      background: #25D366;
+      color: white;
+      padding: 14px 30px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+
+    .btn-wpp:hover { transform: translateY(-2px); }
+
+    .btn-tel {
+      background: rgba(255,255,255,0.15);
+      border: 2px solid rgba(255,255,255,0.4);
+      color: white;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-tel:hover { background: rgba(255,255,255,0.25); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #061826;
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 26px;
+      font-size: 0.8rem;
+    }
+
+    footer strong { color: #80ccee; }
+
+    /* ── CHATBOT ── */
+    #chat-bubble {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      z-index: 1000;
+    }
+
+    #chat-toggle {
+      width: 62px; height: 62px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--azul), var(--azul-escuro));
+      border: none;
+      cursor: pointer;
+      font-size: 1.6rem;
+      box-shadow: 0 8px 25px rgba(26,127,193,0.5);
+      transition: transform 0.2s;
+      color: white;
+    }
+
+    #chat-toggle:hover { transform: scale(1.1); }
+
+    .badge-chat {
+      position: absolute;
+      top: -3px; right: -3px;
+      width: 20px; height: 20px;
+      background: var(--verde);
+      border-radius: 50%;
+      border: 2px solid white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    #chat-win {
+      position: absolute;
+      bottom: 76px; right: 0;
+      width: 320px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+      overflow: hidden;
+      display: none;
+      flex-direction: column;
+    }
+
+    #chat-win.open { display: flex; animation: slideUp 0.3s ease; }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .chat-hdr {
+      background: linear-gradient(135deg, var(--azul), var(--azul-escuro));
+      padding: 15px 18px;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .chat-av {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .chat-hdr-info strong { display: block; font-size: 0.9rem; }
+    .chat-hdr-info span   { font-size: 0.74rem; opacity: 0.85; }
+
+    .chat-bod {
+      padding: 14px;
+      max-height: 300px;
+      overflow-y: auto;
+      background: #f4faff;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .msg {
+      max-width: 82%;
+      padding: 9px 13px;
+      border-radius: 15px;
+      font-size: 0.83rem;
+      line-height: 1.5;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .msg.bot {
+      background: white;
+      color: var(--texto);
+      align-self: flex-start;
+      border-bottom-left-radius: 3px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+
+    .msg.user {
+      background: linear-gradient(135deg, var(--azul), var(--azul-escuro));
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 3px;
+    }
+
+    .chat-opts {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-self: flex-start;
+    }
+
+    .btn-opt {
+      background: white;
+      border: 1.5px solid var(--azul);
+      color: var(--azul);
+      padding: 8px 13px;
+      border-radius: 18px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+    }
+
+    .btn-opt:hover { background: var(--azul); color: white; }
+
+    .typing {
+      display: flex;
+      gap: 4px;
+      padding: 9px 12px;
+      background: white;
+      border-radius: 15px;
+      align-self: flex-start;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+
+    .dot {
+      width: 6px; height: 6px;
+      background: var(--azul);
+      border-radius: 50%;
+      animation: bounce 1.2s infinite;
+    }
+
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: translateY(0); }
+      40%           { transform: translateY(-5px); }
+    }
+
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      #hero { flex-direction: column; padding: 70px 5% 50px; }
+      .hero-visual { margin-top: 36px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="faixa-demo">
+  Demo criado por <span>Fabrizia Soluções Digitais</span> — Automação com Inteligência Artificial para o seu negócio
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">Sorrir <span>Bem</span></div>
+  <ul>
+    <li><a href="#especialidades">Especialidades</a></li>
+    <li><a href="#equipe">Equipe</a></li>
+    <li><a href="#depoimentos">Avaliações</a></li>
+    <li><a href="#contato" class="btn-nav">Agendar Consulta</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <span class="hero-badge">🦷 Clínica Odontológica em Balneário Camboriú</span>
+    <h1>Seu sorriso merece o <em>melhor cuidado</em></h1>
+    <p>Atendimento odontológico completo com tecnologia de ponta, ambiente acolhedor e profissionais altamente capacitados. Cuide da sua saúde bucal com quem entende.</p>
+    <div class="hero-btns">
+      <a href="#contato" class="btn-primary">💬 Agendar pelo WhatsApp</a>
+      <a href="#especialidades" class="btn-secondary">Ver especialidades</a>
+    </div>
+    <div class="hero-credenciais">
+      <div class="cred-item">
+        <strong>2.000+</strong>
+        <span>Pacientes atendidos</span>
+      </div>
+      <div class="cred-item">
+        <strong>12 anos</strong>
+        <span>De experiência</span>
+      </div>
+      <div class="cred-item">
+        <strong>4.9 ⭐</strong>
+        <span>No Google</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="hero-icon-big">🦷</div>
+      <h3>Agendamento 24h</h3>
+      <p>Agende sua consulta a qualquer hora pelo nosso assistente automático</p>
+      <span class="disponivel"><span class="dot-verde"></span>Disponível agora</span>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section id="diferenciais">
+  <div class="section-header">
+    <span class="section-tag">Por que nos escolher</span>
+    <h2>Nossos Diferenciais</h2>
+    <p>Tecnologia, cuidado e conforto em cada consulta.</p>
+  </div>
+  <div class="grid-diferenciais">
+    <div class="card-diferencial">
+      <div class="icone-dif">🤖</div>
+      <h3>Agendamento Automático</h3>
+      <p>Agende 24h por dia pelo WhatsApp, sem precisar ligar.</p>
+    </div>
+    <div class="card-diferencial">
+      <div class="icone-dif">📱</div>
+      <h3>Lembrete de Consulta</h3>
+      <p>Receba lembretes automáticos 1 dia antes da sua consulta.</p>
+    </div>
+    <div class="card-diferencial">
+      <div class="icone-dif">💡</div>
+      <h3>Tecnologia Digital</h3>
+      <p>Radiografias digitais, scanner 3D e equipamentos modernos.</p>
+    </div>
+    <div class="card-diferencial">
+      <div class="icone-dif">💳</div>
+      <h3>Parcelamento</h3>
+      <p>Parcele em até 12x no cartão sem juros nos tratamentos.</p>
+    </div>
+    <div class="card-diferencial">
+      <div class="icone-dif">🏥</div>
+      <h3>Convênios</h3>
+      <p>Aceitamos os principais planos odontológicos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ESPECIALIDADES -->
+<section id="especialidades">
+  <div class="section-header">
+    <span class="section-tag">Tratamentos</span>
+    <h2>Nossas Especialidades</h2>
+    <p>Tratamentos completos para toda a família.</p>
+  </div>
+  <div class="grid-especialidades">
+    <div class="card-especialidade">
+      <div class="esp-icone">✨</div>
+      <h3>Clareamento Dental</h3>
+      <p>Clareamento a laser ou com moldeiras. Resultados visíveis em 1 sessão, dentes até 8 tons mais claros.</p>
+      <span class="preco-esp">A partir de R$ 400</span>
+    </div>
+    <div class="card-especialidade">
+      <div class="esp-icone">😁</div>
+      <h3>Ortodontia</h3>
+      <p>Aparelho metálico, estético ou alinhadores invisíveis para o sorriso alinhado que você sempre quis.</p>
+      <span class="preco-esp">A partir de R$ 150/mês</span>
+    </div>
+    <div class="card-especialidade">
+      <div class="esp-icone">🦷</div>
+      <h3>Implante Dental</h3>
+      <p>Reposição de dentes perdidos com implantes de titânio. Resultado natural e duradouro.</p>
+      <span class="preco-esp">A partir de R$ 1.800</span>
+    </div>
+    <div class="card-especialidade">
+      <div class="esp-icone">🧼</div>
+      <h3>Limpeza & Profilaxia</h3>
+      <p>Limpeza profissional completa, remoção de tártaro e polimento para saúde bucal em dia.</p>
+      <span class="preco-esp">A partir de R$ 120</span>
+    </div>
+    <div class="card-especialidade">
+      <div class="esp-icone">💎</div>
+      <h3>Lentes de Contato Dental</h3>
+      <p>Transforme seu sorriso com facetas ultra-finas. Correção de formato, cor e tamanho dos dentes.</p>
+      <span class="preco-esp">A partir de R$ 800/dente</span>
+    </div>
+    <div class="card-especialidade">
+      <div class="esp-icone">👶</div>
+      <h3>Odontopediatria</h3>
+      <p>Atendimento especializado para crianças em ambiente lúdico e acolhedor.</p>
+      <span class="preco-esp">A partir de R$ 100</span>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPE -->
+<section id="equipe">
+  <div class="section-header">
+    <span class="section-tag">Nossa equipe</span>
+    <h2>Especialistas em Saúde Bucal</h2>
+    <p>Profissionais com CRO ativo, pós-graduação e anos de experiência clínica.</p>
+  </div>
+  <div class="grid-equipe">
+    <div class="card-dr">
+      <div class="foto-dr">👩‍⚕️</div>
+      <h3>Dra. Carla Mendes</h3>
+      <div class="cargo-dr">Clínica Geral & Estética</div>
+      <div class="cro-dr">CRO-SC 18542</div>
+    </div>
+    <div class="card-dr">
+      <div class="foto-dr">👨‍⚕️</div>
+      <h3>Dr. Ricardo Alves</h3>
+      <div class="cargo-dr">Implantodontia</div>
+      <div class="cro-dr">CRO-SC 22130</div>
+    </div>
+    <div class="card-dr">
+      <div class="foto-dr">👩‍⚕️</div>
+      <h3>Dra. Fernanda Costa</h3>
+      <div class="cargo-dr">Ortodontia</div>
+      <div class="cro-dr">CRO-SC 19876</div>
+    </div>
+    <div class="card-dr">
+      <div class="foto-dr">👨‍⚕️</div>
+      <h3>Dr. Paulo Neto</h3>
+      <div class="cargo-dr">Odontopediatria</div>
+      <div class="cro-dr">CRO-SC 25310</div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section id="depoimentos">
+  <div class="section-header">
+    <span class="section-tag">Avaliações</span>
+    <h2>O que nossos pacientes dizem</h2>
+    <p>A satisfação de quem sorri com confiança.</p>
+  </div>
+  <div class="grid-depoimentos">
+    <div class="card-dep">
+      <div class="dep-estrelas">★★★★★</div>
+      <p class="dep-texto">"Fiz o clareamento e ficou incrível! Além disso, o agendamento pelo WhatsApp é muito prático. Consegui marcar meia-noite e já recebi confirmação na hora."</p>
+      <div class="dep-autor">
+        <div class="avatar-dep">👩</div>
+        <div class="dep-nome">
+          <strong>Aline Martins</strong>
+          <span>Paciente há 2 anos</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-dep">
+      <div class="dep-estrelas">★★★★★</div>
+      <p class="dep-texto">"Implante feito com o Dr. Ricardo. Resultado perfeito, dente natural demais. O lembrete automático pelo WhatsApp foi ótimo para não esquecer os retornos."</p>
+      <div class="dep-autor">
+        <div class="avatar-dep">👨</div>
+        <div class="dep-nome">
+          <strong>Carlos Eduardo</strong>
+          <span>Paciente há 3 anos</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-dep">
+      <div class="dep-estrelas">★★★★★</div>
+      <p class="dep-texto">"Minha filha tinha muito medo de dentista. O Dr. Paulo foi tão cuidadoso que ela saiu querendo voltar! Adoramos a clínica."</p>
+      <div class="dep-autor">
+        <div class="avatar-dep">👩</div>
+        <div class="dep-nome">
+          <strong>Simone Pereira</strong>
+          <span>Paciente há 1 ano</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <h2>Agende sua consulta hoje</h2>
+  <p>Atendimento rápido pelo WhatsApp ou ligue para nós. Primeiras consultas de avaliação com valor especial.</p>
+  <div class="contato-btns">
+    <a href="#" class="btn-wpp">📱 Agendar pelo WhatsApp</a>
+    <a href="#" class="btn-tel">📞 (47) 3333-0000</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 <strong>Clínica Sorrir Bem</strong> — Todos os direitos reservados | CRO-SC</p>
+  <p style="margin-top:6px;">Site desenvolvido por <strong>Fabrizia Soluções Digitais</strong> 🤖</p>
+</footer>
+
+<!-- CHATBOT -->
+<div id="chat-bubble">
+  <div id="chat-win">
+    <div class="chat-hdr">
+      <div class="chat-av">🦷</div>
+      <div class="chat-hdr-info">
+        <strong>Sorrir Bem</strong>
+        <span>🟢 Agendamento automático</span>
+      </div>
+    </div>
+    <div class="chat-bod" id="chat-body"></div>
+  </div>
+  <button id="chat-toggle" onclick="toggleChat()">🦷</button>
+  <div class="badge-chat">1</div>
+</div>
+
+<script>
+  let aberto = false, etapa = 0;
+
+  const respostas = {
+    '📅 Agendar consulta': [
+      { texto: 'Ótimo! Qual especialidade você precisa?', opcoes: ['✨ Clareamento', '😁 Ortodontia', '🦷 Implante', '🧼 Limpeza', '💎 Lentes de Contato', '👶 Odontopediatria'] }
+    ],
+    '✨ Clareamento': [
+      { texto: 'Perfeito! Para clareamento temos a Dra. Carla disponível. Qual dia você prefere?' ,opcoes: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'] }
+    ],
+    'Terça': [
+      { texto: 'Na terça temos os horários: 9h, 11h, 14h e 16h. Qual prefere?', opcoes: ['9h', '11h', '14h', '16h'] }
+    ],
+    '14h': [
+      { texto: '✅ Consulta agendada!<br><br>📅 <strong>Terça-feira às 14h</strong><br>👩‍⚕️ Dra. Carla Mendes<br>✨ Clareamento dental<br><br>Enviarei um lembrete 1 dia antes. Até lá! 😊' }
+    ],
+    '🦷 Ver especialidades': [
+      { texto: '🦷 <strong>Nossas especialidades:</strong><br><br>✨ Clareamento — a partir de R$ 400<br>😁 Ortodontia — a partir de R$ 150/mês<br>🦷 Implante — a partir de R$ 1.800<br>🧼 Limpeza — a partir de R$ 120<br>💎 Lentes de Contato — R$ 800/dente<br>👶 Odontopediatria — a partir de R$ 100' },
+      { texto: 'Gostaria de agendar alguma consulta?', opcoes: ['📅 Agendar consulta', '❓ Mais informações'] }
+    ],
+    '❓ Mais informações': [
+      { texto: '📍 <strong>Endereço:</strong> Av. Brasil, 456 — Centro<br><br>⏰ <strong>Horários:</strong><br>Seg–Sex: 8h às 18h<br>Sábado: 8h às 13h<br><br>📞 (47) 3333-0000<br>💳 Parcelamos em até 12x' },
+      { texto: 'Posso te ajudar com mais algo?', opcoes: ['📅 Agendar consulta', '👨‍⚕️ Falar com atendente'] }
+    ],
+    '👨‍⚕️ Falar com atendente': [
+      { texto: 'Claro! Vou te conectar com nossa equipe agora. Um momento... 😊<br><br>📞 Ou ligue: <strong>(47) 3333-0000</strong>' }
+    ]
+  };
+
+  function toggleChat() {
+    aberto = !aberto;
+    const win = document.getElementById('chat-win');
+    const badge = document.querySelector('.badge-chat');
+    const btn = document.getElementById('chat-toggle');
+    if (aberto) {
+      win.classList.add('open');
+      badge.style.display = 'none';
+      btn.textContent = '✕';
+      if (etapa === 0) { setTimeout(iniciar, 400); etapa = 1; }
+    } else {
+      win.classList.remove('open');
+      btn.textContent = '🦷';
+    }
+  }
+
+  function iniciar() {
+    addMsg('Olá! 😊 Bem-vindo(a) à <strong>Clínica Sorrir Bem</strong>! Como posso te ajudar?', 'bot');
+    setTimeout(() => addOpts(['📅 Agendar consulta', '🦷 Ver especialidades', '❓ Mais informações', '👨‍⚕️ Falar com atendente']), 900);
+  }
+
+  function addMsg(txt, tipo) {
+    const body = document.getElementById('chat-body');
+    const t = document.createElement('div');
+    t.className = 'typing';
+    t.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+    body.appendChild(t); body.scrollTop = body.scrollHeight;
+    setTimeout(() => {
+      t.remove();
+      const d = document.createElement('div');
+      d.className = `msg ${tipo}`;
+      d.innerHTML = txt;
+      body.appendChild(d); body.scrollTop = body.scrollHeight;
+    }, tipo === 'bot' ? 650 : 0);
+  }
+
+  function addOpts(opts) {
+    const body = document.getElementById('chat-body');
+    const div = document.createElement('div');
+    div.className = 'chat-opts';
+    opts.forEach(op => {
+      const b = document.createElement('button');
+      b.className = 'btn-opt';
+      b.textContent = op;
+      b.onclick = () => escolher(op, div);
+      div.appendChild(b);
+    });
+    body.appendChild(div); body.scrollTop = body.scrollHeight;
+  }
+
+  function escolher(op, container) {
+    container.remove();
+    addMsg(op, 'user');
+    const resp = respostas[op];
+    if (!resp) { setTimeout(() => addMsg('Nossa equipe vai te ajudar em breve! 😊', 'bot'), 800); return; }
+    resp.forEach((item, i) => {
+      setTimeout(() => {
+        addMsg(item.texto, 'bot');
+        if (item.opcoes) setTimeout(() => addOpts(item.opcoes), 800);
+      }, 800 * (i + 1));
+    });
+  }
+</script>
+
+</body>
+</html>

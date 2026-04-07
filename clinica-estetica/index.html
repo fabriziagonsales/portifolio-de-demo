@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Studio Lumière — Clínica de Estética</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #c9a97a;
+      --gold-light: #e8d5b7;
+      --nude: #f8ece0;
+      --dark: #1a0f0a;
+      --medium: #4a3728;
+      --white: #fff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; color: var(--dark); background: var(--white); }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--gold-light);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 5%; height: 70px;
+    }
+    .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--medium); letter-spacing: 2px; }
+    .logo span { color: var(--gold); }
+    nav ul { list-style: none; display: flex; gap: 32px; }
+    nav ul a { text-decoration: none; color: var(--medium); font-size: .85rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color .3s; }
+    nav ul a:hover { color: var(--gold); }
+    .nav-btn {
+      background: var(--gold); color: var(--white); border: none; padding: 10px 24px;
+      font-size: .82rem; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer;
+      transition: background .3s;
+    }
+    .nav-btn:hover { background: var(--medium); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      background: linear-gradient(135deg, #1a0f0a 0%, #3d2314 50%, #1a0f0a 100%);
+      position: relative; overflow: hidden; padding-top: 70px;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(201,169,122,.15) 0%, transparent 70%);
+    }
+    .hero-content { position: relative; z-index: 2; padding: 0 10%; max-width: 700px; }
+    .hero-tag {
+      display: inline-block; background: rgba(201,169,122,.15); border: 1px solid rgba(201,169,122,.4);
+      color: var(--gold); font-size: .75rem; letter-spacing: 3px; text-transform: uppercase;
+      padding: 6px 16px; margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem,6vw,5.5rem);
+      font-weight: 300; color: var(--white); line-height: 1.1; margin-bottom: 12px;
+    }
+    .hero h1 em { color: var(--gold); font-style: italic; }
+    .hero p { color: rgba(255,255,255,.65); font-size: 1.05rem; line-height: 1.8; margin: 20px 0 36px; max-width: 480px; }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold); color: var(--white); border: none; padding: 16px 36px;
+      font-size: .88rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+      transition: all .3s; text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover { background: var(--white); color: var(--dark); }
+    .btn-outline {
+      background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,.4);
+      padding: 16px 36px; font-size: .88rem; letter-spacing: 2px; text-transform: uppercase;
+      cursor: pointer; transition: all .3s; text-decoration: none; display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+    .hero-badges {
+      position: absolute; right: 8%; top: 50%; transform: translateY(-50%);
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .badge {
+      background: rgba(255,255,255,.08); backdrop-filter: blur(10px);
+      border: 1px solid rgba(201,169,122,.3); padding: 20px 24px;
+      text-align: center; color: var(--white);
+    }
+    .badge-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: var(--gold); display: block; }
+    .badge-label { font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; opacity: .7; }
+
+    /* SECTION BASE */
+    section { padding: 90px 10%; }
+    .section-tag {
+      display: block; color: var(--gold); font-size: .72rem; letter-spacing: 3px;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,4vw,3rem);
+      font-weight: 400; color: var(--dark); line-height: 1.2;
+    }
+    .sub { color: var(--medium); font-size: .95rem; line-height: 1.8; margin-top: 12px; max-width: 540px; }
+
+    /* SERVIÇOS */
+    .servicos { background: var(--nude); }
+    .servicos-header { margin-bottom: 56px; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 24px; }
+    .card {
+      background: var(--white); padding: 40px 32px;
+      border-bottom: 3px solid transparent; transition: all .3s;
+      position: relative; overflow: hidden;
+    }
+    .card::before {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: var(--gold); transform: scaleX(0); transition: transform .3s;
+    }
+    .card:hover::before { transform: scaleX(1); }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,.08); }
+    .card-icon { font-size: 2rem; margin-bottom: 20px; }
+    .card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin-bottom: 12px; color: var(--medium); }
+    .card p { font-size: .9rem; color: #666; line-height: 1.7; }
+    .card-price { margin-top: 20px; font-weight: 700; color: var(--gold); font-size: 1rem; }
+
+    /* DIFERENCIAIS */
+    .diferenciais { background: var(--dark); }
+    .diferenciais h2 { color: var(--white); }
+    .diferenciais .sub { color: rgba(255,255,255,.6); }
+    .diff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 32px; margin-top: 56px; }
+    .diff-item { text-align: center; }
+    .diff-circle {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: rgba(201,169,122,.15); border: 1px solid rgba(201,169,122,.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; margin: 0 auto 20px;
+    }
+    .diff-item h4 { color: var(--gold); font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; margin-bottom: 8px; }
+    .diff-item p { color: rgba(255,255,255,.55); font-size: .85rem; line-height: 1.7; }
+
+    /* DEPOIMENTOS */
+    .depoimentos { background: var(--white); }
+    .dep-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 28px; margin-top: 48px; }
+    .dep-card { background: var(--nude); padding: 36px; position: relative; }
+    .dep-card::before { content: '"'; font-family: 'Cormorant Garamond', serif; font-size: 5rem; color: var(--gold); opacity: .3; position: absolute; top: 8px; left: 20px; line-height: 1; }
+    .dep-card p { position: relative; font-size: .92rem; color: var(--medium); line-height: 1.8; font-style: italic; }
+    .dep-author { margin-top: 20px; display: flex; align-items: center; gap: 12px; }
+    .dep-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; color: var(--white); font-weight: 700; }
+    .dep-name { font-weight: 700; font-size: .88rem; }
+    .dep-sub { font-size: .78rem; color: #888; }
+    .stars { color: var(--gold); font-size: .85rem; margin-bottom: 12px; }
+
+    /* GALERIA */
+    .galeria { background: var(--nude); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 48px; }
+    .gal-item {
+      height: 220px; border-radius: 2px; overflow: hidden;
+      background: linear-gradient(135deg, var(--gold-light), var(--nude));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem; transition: transform .3s;
+    }
+    .gal-item:hover { transform: scale(1.02); }
+    .gal-item:nth-child(1) { background: linear-gradient(135deg,#e8d5b7,#f0c8b0); }
+    .gal-item:nth-child(2) { background: linear-gradient(135deg,#d4a574,#c9a97a); }
+    .gal-item:nth-child(3) { background: linear-gradient(135deg,#f5e6d3,#e8c9a0); }
+    .gal-item:nth-child(4) { background: linear-gradient(135deg,#c9a97a,#b8905e); }
+    .gal-item:nth-child(5) { background: linear-gradient(135deg,#e0c4a0,#d4a574); grid-column: span 2; }
+    .gal-item:nth-child(6) { background: linear-gradient(135deg,#f8ece0,#ecd5b7); }
+
+    /* CONTATO */
+    .contato { background: linear-gradient(135deg, #1a0f0a, #3d2314); }
+    .contato h2 { color: var(--white); }
+    .contato .sub { color: rgba(255,255,255,.6); }
+    .contato-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 48px; }
+    .contact-info { display: flex; flex-direction: column; gap: 24px; }
+    .contact-item { display: flex; align-items: flex-start; gap: 16px; color: rgba(255,255,255,.8); }
+    .contact-icon { font-size: 1.4rem; margin-top: 2px; }
+    .contact-item strong { display: block; color: var(--gold); margin-bottom: 4px; font-size: .85rem; letter-spacing: 1px; }
+    .contact-item span { font-size: .9rem; }
+    form { display: flex; flex-direction: column; gap: 16px; }
+    form input, form select, form textarea {
+      background: rgba(255,255,255,.08); border: 1px solid rgba(201,169,122,.3);
+      color: var(--white); padding: 14px 16px; font-family: 'Lato', sans-serif;
+      font-size: .9rem; outline: none; transition: border-color .3s;
+    }
+    form input::placeholder, form textarea::placeholder { color: rgba(255,255,255,.4); }
+    form input:focus, form select:focus, form textarea:focus { border-color: var(--gold); }
+    form select option { background: var(--dark); }
+    form textarea { resize: vertical; min-height: 100px; }
+    form button { align-self: flex-start; }
+
+    /* FOOTER */
+    footer {
+      background: #0d0805; color: rgba(255,255,255,.4); text-align: center;
+      padding: 28px; font-size: .82rem; letter-spacing: 1px;
+    }
+    footer span { color: var(--gold); }
+
+    /* WHATSAPP */
+    .whatsapp-btn {
+      position: fixed; bottom: 90px; right: 28px; z-index: 999;
+      background: #25d366; color: var(--white); border: none;
+      width: 56px; height: 56px; border-radius: 50%; font-size: 1.6rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 4px 20px rgba(37,211,102,.4);
+      transition: transform .3s; text-decoration: none;
+    }
+    .whatsapp-btn:hover { transform: scale(1.1); }
+
+    /* CHATBOT */
+    .chat-toggle {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      background: var(--gold); color: var(--white); border: none;
+      width: 56px; height: 56px; border-radius: 50%; font-size: 1.4rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 4px 20px rgba(201,169,122,.5);
+      transition: all .3s;
+    }
+    .chat-toggle:hover { transform: scale(1.08); background: var(--medium); }
+    .chat-box {
+      position: fixed; bottom: 96px; right: 28px; z-index: 998;
+      width: 340px; background: var(--white);
+      box-shadow: 0 16px 48px rgba(0,0,0,.18);
+      display: none; flex-direction: column; overflow: hidden;
+      border-radius: 16px;
+    }
+    .chat-box.open { display: flex; animation: slideUp .3s ease; }
+    @keyframes slideUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+    .chat-header {
+      background: linear-gradient(135deg, var(--medium), var(--dark));
+      color: var(--white); padding: 16px 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .chat-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    }
+    .chat-header-info strong { display: block; font-size: .92rem; }
+    .chat-header-info span { font-size: .75rem; opacity: .7; }
+    .online-dot { width: 8px; height: 8px; border-radius: 50%; background: #25d366; margin-left: auto; }
+    .chat-msgs { flex: 1; padding: 16px; overflow-y: auto; max-height: 280px; display: flex; flex-direction: column; gap: 10px; }
+    .msg { max-width: 82%; padding: 10px 14px; border-radius: 12px; font-size: .88rem; line-height: 1.5; }
+    .msg.bot { background: var(--nude); color: var(--dark); align-self: flex-start; border-bottom-left-radius: 2px; }
+    .msg.user { background: var(--gold); color: var(--white); align-self: flex-end; border-bottom-right-radius: 2px; }
+    .quick-replies { padding: 8px 16px 0; display: flex; flex-wrap: wrap; gap: 8px; }
+    .qr-btn {
+      background: var(--white); border: 1px solid var(--gold); color: var(--gold);
+      padding: 6px 12px; border-radius: 20px; font-size: .78rem; cursor: pointer; transition: all .2s;
+    }
+    .qr-btn:hover { background: var(--gold); color: var(--white); }
+    .chat-footer { padding: 12px 16px; border-top: 1px solid #eee; display: flex; gap: 8px; }
+    .chat-footer input {
+      flex: 1; border: 1px solid #ddd; padding: 8px 12px; border-radius: 20px;
+      font-size: .85rem; outline: none;
+    }
+    .chat-footer button {
+      background: var(--gold); border: none; color: var(--white);
+      width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 1rem;
+    }
+
+    @media(max-width:768px) {
+      .hero-badges { display: none; }
+      .contato-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gal-item:nth-child(5) { grid-column: span 1; }
+      nav ul { display: none; }
+      .chat-box { width: 300px; right: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Studio <span>Lumière</span></div>
+  <ul>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#galeria">Galeria</a></li>
+    <li><a href="#depoimentos">Depoimentos</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <button class="nav-btn" onclick="openChat()">Agendar</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-tag">✦ Clínica de Estética Premium</span>
+    <h1>Realce sua<br/><em>beleza natural</em></h1>
+    <p>Tratamentos exclusivos que combinam ciência e sofisticação para revelar a sua melhor versão. Resultados visíveis, experiência inesquecível.</p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="#servicos">Nossos Serviços</a>
+      <a class="btn-outline" href="#contato">Agendar Consulta</a>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <div class="badge">
+      <span class="badge-num">1.200+</span>
+      <span class="badge-label">Clientes satisfeitas</span>
+    </div>
+    <div class="badge">
+      <span class="badge-num">8 anos</span>
+      <span class="badge-label">de experiência</span>
+    </div>
+    <div class="badge">
+      <span class="badge-num">98%</span>
+      <span class="badge-label">recomendam</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section class="servicos" id="servicos">
+  <div class="servicos-header">
+    <span class="section-tag">✦ O que oferecemos</span>
+    <h2>Tratamentos que transformam</h2>
+    <p class="sub">Cada procedimento é personalizado para o seu tipo de pele e objetivos.</p>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">✨</div>
+      <h3>Harmonização Facial</h3>
+      <p>Preenchimento com ácido hialurônico e bioremodeladores para contornos harmoniosos e naturais.</p>
+      <div class="card-price">A partir de R$ 890</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">💎</div>
+      <h3>Limpeza de Pele</h3>
+      <p>Protocolo profundo com esfoliação, extração e hidratação intensiva. Pele renovada e radiante.</p>
+      <div class="card-price">A partir de R$ 180</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h3>Laser & Luz Pulsada</h3>
+      <p>Remoção de manchas, rejuvenescimento e depilação definitiva com tecnologia de ponta.</p>
+      <div class="card-price">A partir de R$ 320</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌸</div>
+      <h3>Peeling Químico</h3>
+      <p>Renove sua pele com peelings personalizados que eliminam imperfeições e estimulam o colágeno.</p>
+      <div class="card-price">A partir de R$ 240</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">👁️</div>
+      <h3>Design de Sobrancelhas</h3>
+      <p>Micropigmentação e design personalizado para sobrancelhas que enquadram e realçam seu olhar.</p>
+      <div class="card-price">A partir de R$ 290</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">💆</div>
+      <h3>Drenagem & Corporal</h3>
+      <p>Massagem linfática, modeladora e tratamentos para celulite com tecnologias avançadas.</p>
+      <div class="card-price">A partir de R$ 160</div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section class="diferenciais">
+  <span class="section-tag">✦ Por que nos escolher</span>
+  <h2 style="color:#fff">Excelência em cada detalhe</h2>
+  <p class="sub">Sua experiência começa no momento em que você entra.</p>
+  <div class="diff-grid">
+    <div class="diff-item">
+      <div class="diff-circle">👩‍⚕️</div>
+      <h4>Equipe Especializada</h4>
+      <p>Profissionais certificados com formação contínua nas técnicas mais avançadas do mercado.</p>
+    </div>
+    <div class="diff-item">
+      <div class="diff-circle">🔬</div>
+      <h4>Tecnologia Premium</h4>
+      <p>Equipamentos de última geração homologados pela ANVISA para resultados seguros e eficazes.</p>
+    </div>
+    <div class="diff-item">
+      <div class="diff-circle">🌿</div>
+      <h4>Produtos Exclusivos</h4>
+      <p>Utilizamos cosméticos importados de alta performance adaptados ao clima brasileiro.</p>
+    </div>
+    <div class="diff-item">
+      <div class="diff-circle">📋</div>
+      <h4>Protocolo Personalizado</h4>
+      <p>Avaliação individual da sua pele antes de qualquer procedimento para melhores resultados.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section class="galeria" id="galeria">
+  <span class="section-tag">✦ Resultados</span>
+  <h2>Transformações reais</h2>
+  <p class="sub">Cada resultado é fruto de técnica, cuidado e dedicação total à cliente.</p>
+  <div class="gallery-grid">
+    <div class="gal-item">🌸</div>
+    <div class="gal-item">✨</div>
+    <div class="gal-item">💆</div>
+    <div class="gal-item">💎</div>
+    <div class="gal-item">👑 Resultados que falam por si só</div>
+    <div class="gal-item">🌟</div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="depoimentos" id="depoimentos">
+  <span class="section-tag">✦ Depoimentos</span>
+  <h2>O que nossas clientes dizem</h2>
+  <div class="dep-grid">
+    <div class="dep-card">
+      <div class="stars">★★★★★</div>
+      <p>Fiz harmonização facial e o resultado superou todas as expectativas. Ficou extremamente natural e eu me sinto muito mais confiante. A equipe é incrível!</p>
+      <div class="dep-author">
+        <div class="dep-avatar">A</div>
+        <div>
+          <div class="dep-name">Ana Carolina M.</div>
+          <div class="dep-sub">Harmonização Facial</div>
+        </div>
+      </div>
+    </div>
+    <div class="dep-card">
+      <div class="stars">★★★★★</div>
+      <p>Fiz o pacote de laser para manchas e minha pele mudou completamente. Após 4 sessões as manchas sumiram. Recomendo demais o Studio Lumière!</p>
+      <div class="dep-author">
+        <div class="dep-avatar">J</div>
+        <div>
+          <div class="dep-name">Juliana Ferreira</div>
+          <div class="dep-sub">Laser Clareador</div>
+        </div>
+      </div>
+    </div>
+    <div class="dep-card">
+      <div class="stars">★★★★★</div>
+      <p>O ambiente é lindo e acolhedor. A limpeza de pele que faço mensalmente deixa minha pele impecável. Nunca mais procurei outro lugar!</p>
+      <div class="dep-author">
+        <div class="dep-avatar">M</div>
+        <div>
+          <div class="dep-name">Mariana Souza</div>
+          <div class="dep-sub">Limpeza de Pele</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="contato" id="contato">
+  <span class="section-tag">✦ Fale Conosco</span>
+  <h2>Agende sua consulta</h2>
+  <p class="sub">Nossa equipe entrará em contato para confirmar seu horário.</p>
+  <div class="contato-grid">
+    <div class="contact-info">
+      <div class="contact-item">
+        <span class="contact-icon">📍</span>
+        <div><strong>Endereço</strong><span>Rua das Orquídeas, 347 — Jardim Europa<br/>São Paulo, SP</span></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">📞</span>
+        <div><strong>Telefone / WhatsApp</strong><span>(11) 99999-0000</span></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">🕐</span>
+        <div><strong>Horário de Funcionamento</strong><span>Seg – Sex: 9h às 19h<br/>Sáb: 9h às 15h</span></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">✉️</span>
+        <div><strong>E-mail</strong><span>contato@studiolumiere.com.br</span></div>
+      </div>
+    </div>
+    <form onsubmit="handleForm(event)">
+      <input type="text" placeholder="Seu nome completo" required />
+      <input type="tel" placeholder="WhatsApp / Telefone" required />
+      <select required>
+        <option value="" disabled selected>Escolha o serviço de interesse</option>
+        <option>Harmonização Facial</option>
+        <option>Limpeza de Pele</option>
+        <option>Laser & Luz Pulsada</option>
+        <option>Peeling Químico</option>
+        <option>Design de Sobrancelhas</option>
+        <option>Drenagem & Corporal</option>
+      </select>
+      <textarea placeholder="Mensagem ou preferência de horário (opcional)"></textarea>
+      <button type="submit" class="btn-primary">Solicitar Agendamento</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 <span>Studio Lumière</span> — Clínica de Estética. Todos os direitos reservados.</p>
+</footer>
+
+<!-- WhatsApp fixo -->
+<a class="whatsapp-btn" href="https://wa.me/5511999990000?text=Olá! Gostaria de agendar uma consulta no Studio Lumière." target="_blank" title="Chamar no WhatsApp">💬</a>
+
+<!-- Chatbot -->
+<button class="chat-toggle" id="chatToggle" onclick="openChat()">🤖</button>
+<div class="chat-box" id="chatBox">
+  <div class="chat-header">
+    <div class="chat-avatar">✨</div>
+    <div class="chat-header-info">
+      <strong>Lumie — Assistente Virtual</strong>
+      <span>Studio Lumière • Online agora</span>
+    </div>
+    <span class="online-dot"></span>
+  </div>
+  <div class="chat-msgs" id="chatMsgs">
+    <div class="msg bot">Olá! Sou a <strong>Lumie</strong>, assistente virtual do Studio Lumière 🌸<br/>Como posso te ajudar hoje?</div>
+  </div>
+  <div class="quick-replies" id="quickReplies">
+    <button class="qr-btn" onclick="qr('Quero conhecer os serviços')">Ver serviços</button>
+    <button class="qr-btn" onclick="qr('Quais são os preços?')">Ver preços</button>
+    <button class="qr-btn" onclick="qr('Quero agendar uma consulta')">Agendar</button>
+    <button class="qr-btn" onclick="qr('Onde vocês ficam?')">Localização</button>
+  </div>
+  <div class="chat-footer">
+    <input type="text" id="chatInput" placeholder="Digite sua mensagem..." onkeydown="if(event.key==='Enter') sendMsg()" />
+    <button onclick="sendMsg()">➤</button>
+  </div>
+</div>
+
+<script>
+  const respostas = {
+    'quero conhecer os serviços': 'Oferecemos: ✨ Harmonização Facial, 💎 Limpeza de Pele, ⚡ Laser & Luz Pulsada, 🌸 Peeling Químico, 👁️ Design de Sobrancelhas e 💆 Drenagem Corporal. Qual desses te interessa mais?',
+    'quais são os preços?': 'Nossos valores começam em:\n• Limpeza de Pele: R$ 180\n• Peeling: R$ 240\n• Design de Sobrancelhas: R$ 290\n• Laser: R$ 320\n• Harmonização: R$ 890\nGostaria de agendar uma avaliação gratuita?',
+    'quero agendar uma consulta': 'Que ótimo! 😊 Para agendar, você pode:\n1️⃣ Preencher o formulário aqui no site\n2️⃣ Nos chamar no WhatsApp\n\nQual prefere?',
+    'onde vocês ficam?': '📍 Estamos na Rua das Orquídeas, 347 — Jardim Europa, São Paulo.\n\n🕐 Horários:\nSeg-Sex: 9h às 19h\nSáb: 9h às 15h\n\nTem mais alguma dúvida?',
+  };
+
+  function openChat() {
+    const box = document.getElementById('chatBox');
+    box.classList.toggle('open');
+  }
+
+  function addMsg(text, type) {
+    const msgs = document.getElementById('chatMsgs');
+    const div = document.createElement('div');
+    div.className = `msg ${type}`;
+    div.innerHTML = text.replace(/\n/g, '<br/>');
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function qr(text) {
+    addMsg(text, 'user');
+    document.getElementById('quickReplies').innerHTML = '';
+    setTimeout(() => {
+      const key = text.toLowerCase();
+      const resp = respostas[key] || 'Entendido! Para informações mais detalhadas, pode nos chamar no WhatsApp ou preencher o formulário de agendamento. 💛';
+      addMsg(resp, 'bot');
+      if (key.includes('agendar') || key.includes('whatsapp')) {
+        setTimeout(() => addMsg('👇 <a href="https://wa.me/5511999990000" target="_blank" style="color:#c9a97a">Clique aqui para falar no WhatsApp</a>', 'bot'), 600);
+      }
+    }, 700);
+  }
+
+  function sendMsg() {
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text) return;
+    addMsg(text, 'user');
+    input.value = '';
+    document.getElementById('quickReplies').innerHTML = '';
+    setTimeout(() => {
+      addMsg('Obrigada pelo contato! 😊 Para falarmos melhor, te convido a nos chamar no WhatsApp ou preencher o formulário. Estamos à disposição! 💛', 'bot');
+    }, 700);
+  }
+
+  function handleForm(e) {
+    e.preventDefault();
+    alert('Agendamento solicitado com sucesso! ✨\nEntraremos em contato em breve para confirmar seu horário. 💛');
+  }
+</script>
+</body>
+</html>

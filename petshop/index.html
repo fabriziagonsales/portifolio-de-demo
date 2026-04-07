@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PetAmor — Cuidando com amor do seu melhor amigo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --teal: #2a9d8f;
+      --teal-dark: #1f7a6e;
+      --teal-light: #e8f7f5;
+      --yellow: #f4a261;
+      --yellow-light: #fef0e6;
+      --dark: #1a2e2b;
+      --gray: #6b7b78;
+      --light: #f7fbfa;
+      --white: #fff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; background: var(--white); color: var(--dark); }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(255,255,255,.97); backdrop-filter: blur(8px);
+      border-bottom: 2px solid var(--teal-light);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 6%; height: 68px;
+    }
+    .logo { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.7rem; color: var(--teal); letter-spacing: -0.5px; }
+    .logo span { color: var(--yellow); }
+    nav ul { list-style: none; display: flex; gap: 28px; }
+    nav ul a { text-decoration: none; color: var(--gray); font-size: .85rem; font-family: 'Nunito', sans-serif; font-weight: 700; transition: color .3s; }
+    nav ul a:hover { color: var(--teal); }
+    .nav-cta {
+      background: var(--teal); color: var(--white); border: none;
+      padding: 10px 22px; border-radius: 50px; font-family: 'Nunito', sans-serif;
+      font-weight: 800; font-size: .83rem; cursor: pointer; transition: background .3s;
+    }
+    .nav-cta:hover { background: var(--teal-dark); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; padding-top: 68px;
+      background: linear-gradient(135deg, #e8f7f5 0%, #d0f0ea 50%, #e8f7f5 100%);
+      display: flex; align-items: center; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '🐾'; position: absolute; right: -2%; bottom: -2%;
+      font-size: 28vw; opacity: .05; transform: rotate(-15deg);
+    }
+    .hero-content { padding: 0 8%; position: relative; z-index: 2; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(42,157,143,.1); border: 2px solid rgba(42,157,143,.2);
+      color: var(--teal); font-family: 'Nunito', sans-serif; font-weight: 800;
+      font-size: .75rem; letter-spacing: 1px; padding: 6px 16px;
+      border-radius: 50px; margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: 'Nunito', sans-serif; font-weight: 900;
+      font-size: clamp(2.5rem,5.5vw,4.5rem); line-height: 1.1; color: var(--dark);
+      margin-bottom: 12px;
+    }
+    .hero h1 span { color: var(--teal); }
+    .hero p { color: var(--gray); font-size: 1.05rem; line-height: 1.8; margin: 16px 0 36px; max-width: 480px; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-teal {
+      background: var(--teal); color: var(--white); border: none;
+      padding: 14px 32px; border-radius: 50px; font-family: 'Nunito', sans-serif;
+      font-weight: 800; font-size: .9rem; cursor: pointer; transition: all .3s;
+      text-decoration: none; display: inline-block; box-shadow: 0 4px 16px rgba(42,157,143,.3);
+    }
+    .btn-teal:hover { background: var(--teal-dark); transform: translateY(-2px); }
+    .btn-outline-teal {
+      background: transparent; color: var(--teal); border: 2px solid var(--teal);
+      padding: 14px 32px; border-radius: 50px; font-family: 'Nunito', sans-serif;
+      font-weight: 800; font-size: .9rem; cursor: pointer; transition: all .3s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-outline-teal:hover { background: var(--teal); color: var(--white); }
+    .hero-cards {
+      display: flex; gap: 16px; flex-wrap: wrap; margin-top: 48px;
+    }
+    .hero-card {
+      background: var(--white); border-radius: 16px; padding: 16px 20px;
+      display: flex; align-items: center; gap: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.06);
+    }
+    .hero-card-icon { font-size: 1.8rem; }
+    .hero-card strong { display: block; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: .88rem; color: var(--dark); }
+    .hero-card span { font-size: .75rem; color: var(--gray); }
+
+    /* SECTION BASE */
+    section { padding: 88px 8%; }
+    .section-tag {
+      display: inline-block; color: var(--teal); font-family: 'Nunito', sans-serif;
+      font-weight: 800; font-size: .75rem; letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    h2 { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: clamp(1.8rem,3.5vw,2.6rem); color: var(--dark); line-height: 1.15; }
+    .sub { color: var(--gray); font-size: .93rem; line-height: 1.8; margin-top: 10px; }
+
+    /* SERVIÇOS */
+    .servicos { background: var(--light); }
+    .serv-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 24px; margin-top: 48px; }
+    .serv-card {
+      background: var(--white); border-radius: 20px; padding: 36px 28px;
+      transition: all .3s; border: 2px solid transparent;
+    }
+    .serv-card:hover { border-color: var(--teal); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(42,157,143,.12); }
+    .serv-icon { font-size: 2.8rem; margin-bottom: 18px; display: block; }
+    .serv-card h3 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.15rem; color: var(--dark); margin-bottom: 10px; }
+    .serv-card p { color: var(--gray); font-size: .88rem; line-height: 1.7; }
+    .serv-price { margin-top: 18px; font-family: 'Nunito', sans-serif; font-weight: 800; color: var(--teal); font-size: 1rem; }
+    .serv-badge {
+      display: inline-block; background: var(--teal-light); color: var(--teal);
+      font-size: .7rem; font-family: 'Nunito', sans-serif; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px; margin-top: 8px;
+    }
+
+    /* TABELA BANHO E TOSA */
+    .banho-tosa { background: var(--white); }
+    .bt-table-wrap { margin-top: 48px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    th { background: var(--teal); color: var(--white); font-family: 'Nunito', sans-serif; font-weight: 800; padding: 14px 20px; text-align: left; }
+    td { padding: 14px 20px; border-bottom: 1px solid #eee; }
+    tr:hover td { background: var(--teal-light); }
+    .td-size { font-weight: 700; color: var(--dark); font-family: 'Nunito', sans-serif; }
+    .td-price { color: var(--teal); font-weight: 700; font-family: 'Nunito', sans-serif; }
+
+    /* VETERINÁRIO */
+    .veterinario { background: var(--yellow-light); }
+    .vet-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 48px; }
+    .vet-info { display: flex; flex-direction: column; gap: 20px; }
+    .vet-item { display: flex; align-items: flex-start; gap: 14px; background: var(--white); padding: 20px; border-radius: 14px; }
+    .vet-item-icon { font-size: 1.6rem; }
+    .vet-item h4 { font-family: 'Nunito', sans-serif; font-weight: 800; color: var(--dark); margin-bottom: 4px; }
+    .vet-item p { font-size: .85rem; color: var(--gray); line-height: 1.6; }
+    .vet-cta { background: var(--white); border-radius: 20px; padding: 36px; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+    .vet-cta h3 { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.5rem; color: var(--dark); margin-bottom: 12px; }
+    .vet-cta p { color: var(--gray); font-size: .9rem; line-height: 1.7; margin-bottom: 24px; }
+    .vet-price-tag { display: inline-block; background: var(--yellow-light); color: var(--yellow); font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 2rem; padding: 8px 24px; border-radius: 12px; margin-bottom: 24px; }
+
+    /* DEPOIMENTOS */
+    .depoimentos { background: var(--light); }
+    .dep-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 24px; margin-top: 48px; }
+    .dep-card { background: var(--white); border-radius: 20px; padding: 32px; }
+    .dep-pet { font-size: 2rem; margin-bottom: 12px; display: block; }
+    .stars { color: var(--yellow); font-size: .9rem; margin-bottom: 12px; }
+    .dep-card p { color: var(--gray); font-size: .9rem; line-height: 1.7; font-style: italic; }
+    .dep-author { margin-top: 20px; display: flex; align-items: center; gap: 12px; }
+    .dep-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--teal); display: flex; align-items: center; justify-content: center; color: var(--white); font-family: 'Nunito', sans-serif; font-weight: 900; }
+    .dep-name { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: .9rem; }
+    .dep-pet-name { font-size: .78rem; color: var(--gray); }
+
+    /* CONTATO */
+    .contato { background: var(--teal); }
+    .contato h2 { color: var(--white); }
+    .contato .sub { color: rgba(255,255,255,.75); }
+    .contato-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 48px; }
+    .contact-info { display: flex; flex-direction: column; gap: 24px; }
+    .contact-item { display: flex; align-items: flex-start; gap: 14px; }
+    .contact-icon { font-size: 1.4rem; }
+    .contact-item strong { display: block; color: var(--white); font-family: 'Nunito', sans-serif; font-weight: 800; font-size: .82rem; margin-bottom: 4px; }
+    .contact-item span { color: rgba(255,255,255,.8); font-size: .88rem; line-height: 1.6; }
+    form { display: flex; flex-direction: column; gap: 14px; }
+    form input, form select {
+      background: rgba(255,255,255,.15); border: 2px solid rgba(255,255,255,.25);
+      color: var(--white); padding: 14px 16px; border-radius: 10px;
+      font-family: 'Open Sans', sans-serif; font-size: .88rem; outline: none; transition: border-color .3s;
+    }
+    form input::placeholder { color: rgba(255,255,255,.55); }
+    form input:focus, form select:focus { border-color: rgba(255,255,255,.7); }
+    form select option { background: var(--teal-dark); }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark); color: rgba(255,255,255,.4); text-align: center;
+      padding: 28px; font-size: .82rem; font-family: 'Nunito', sans-serif;
+    }
+    footer span { color: var(--teal); }
+
+    /* WHATSAPP */
+    .whatsapp-btn {
+      position: fixed; bottom: 94px; right: 28px; z-index: 999;
+      background: #25d366; color: var(--white); border: none;
+      width: 56px; height: 56px; border-radius: 50%; font-size: 1.6rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 4px 20px rgba(37,211,102,.4);
+      transition: transform .3s; text-decoration: none;
+    }
+    .whatsapp-btn:hover { transform: scale(1.1); }
+
+    /* CHATBOT */
+    .chat-toggle {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      background: var(--teal); border: none; color: var(--white);
+      width: 56px; height: 56px; border-radius: 50%; font-size: 1.5rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 4px 20px rgba(42,157,143,.5); transition: all .3s;
+    }
+    .chat-toggle:hover { transform: scale(1.08); background: var(--teal-dark); }
+    .chat-box {
+      position: fixed; bottom: 96px; right: 28px; z-index: 998;
+      width: 340px; background: var(--white);
+      box-shadow: 0 16px 48px rgba(0,0,0,.18);
+      display: none; flex-direction: column; overflow: hidden; border-radius: 20px;
+      border: 2px solid var(--teal-light);
+    }
+    .chat-box.open { display: flex; animation: slideUp .3s ease; }
+    @keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    .chat-header {
+      background: linear-gradient(135deg,var(--teal-dark),var(--teal));
+      color: var(--white); padding: 16px 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .chat-avatar { width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:1.3rem; }
+    .chat-header-info strong { display:block;font-size:.9rem;font-family:'Nunito',sans-serif;font-weight:800; }
+    .chat-header-info span { font-size:.72rem;opacity:.8; }
+    .online-dot { width:8px;height:8px;border-radius:50%;background:#fff;margin-left:auto; }
+    .chat-msgs { flex:1;padding:16px;overflow-y:auto;max-height:260px;display:flex;flex-direction:column;gap:10px; }
+    .msg { max-width:84%;padding:10px 14px;border-radius:14px;font-size:.86rem;line-height:1.5; }
+    .msg.bot { background:var(--teal-light);color:var(--dark);align-self:flex-start; }
+    .msg.user { background:var(--teal);color:var(--white);align-self:flex-end; }
+    .quick-replies { padding:8px 14px 0;display:flex;flex-wrap:wrap;gap:7px; }
+    .qr-btn { background:transparent;border:2px solid var(--teal);color:var(--teal);padding:6px 12px;border-radius:20px;font-size:.76rem;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;transition:all .2s; }
+    .qr-btn:hover { background:var(--teal);color:var(--white); }
+    .chat-footer { padding:12px;border-top:2px solid var(--teal-light);display:flex;gap:8px; }
+    .chat-footer input { flex:1;background:var(--light);border:2px solid var(--teal-light);color:var(--dark);padding:8px 14px;border-radius:20px;font-size:.84rem;outline:none; }
+    .chat-footer button { background:var(--teal);border:none;color:var(--white);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:.95rem; }
+
+    @media(max-width:768px) {
+      .vet-content { grid-template-columns:1fr; }
+      .contato-grid { grid-template-columns:1fr; }
+      nav ul { display:none; }
+      .chat-box { width:300px;right:12px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Pet<span>Amor</span> 🐾</div>
+  <ul>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#veterinario">Veterinário</a></li>
+    <li><a href="#depoimentos">Depoimentos</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <button class="nav-cta" onclick="openChat()">Agendar Agora</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">🐾 Pet Shop & Clínica Veterinária</div>
+    <h1>Cuidando com amor do seu<br/><span>melhor amigo</span> 🐶🐱</h1>
+    <p>Banho, tosa, veterinário, hotel pet e muito mais. Porque seu pet merece o melhor cuidado com profissionalismo e carinho.</p>
+    <div class="hero-btns">
+      <a class="btn-teal" href="#servicos">Ver Serviços</a>
+      <a class="btn-outline-teal" href="#contato">Agendar</a>
+    </div>
+    <div class="hero-cards">
+      <div class="hero-card">
+        <span class="hero-card-icon">🛁</span>
+        <div><strong>Banho & Tosa</strong><span>A partir de R$ 45</span></div>
+      </div>
+      <div class="hero-card">
+        <span class="hero-card-icon">🏥</span>
+        <div><strong>Veterinário</strong><span>Consulta R$ 120</span></div>
+      </div>
+      <div class="hero-card">
+        <span class="hero-card-icon">🏨</span>
+        <div><strong>Hotel Pet</strong><span>A partir de R$ 60/dia</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="servicos" id="servicos">
+  <span class="section-tag">🐾 Nossos serviços</span>
+  <h2>Tudo que seu pet precisa</h2>
+  <p class="sub">Atendemos cães e gatos com todo cuidado e atenção que eles merecem.</p>
+  <div class="serv-grid">
+    <div class="serv-card">
+      <span class="serv-icon">🛁</span>
+      <h3>Banho & Tosa</h3>
+      <p>Banho completo com produtos premium, secagem, escovação, perfume e laço. Seu pet fica fofo e cheiroso!</p>
+      <div class="serv-price">A partir de R$ 45</div>
+      <span class="serv-badge">Cães e Gatos</span>
+    </div>
+    <div class="serv-card">
+      <span class="serv-icon">🏥</span>
+      <h3>Clínica Veterinária</h3>
+      <p>Consultas, vacinas, exames, cirurgias e emergências. Equipe veterinária experiente e dedicada.</p>
+      <div class="serv-price">Consulta: R$ 120</div>
+      <span class="serv-badge">Seg a Sáb</span>
+    </div>
+    <div class="serv-card">
+      <span class="serv-icon">🏨</span>
+      <h3>Hotel Pet</h3>
+      <p>Seu pet fica em ótimas mãos enquanto você viaja. Acomodações confortáveis, alimentação e passeios.</p>
+      <div class="serv-price">A partir de R$ 60/dia</div>
+      <span class="serv-badge">Cães de todos os portes</span>
+    </div>
+    <div class="serv-card">
+      <span class="serv-icon">🎒</span>
+      <h3>Creche Pet</h3>
+      <p>Seu pet passa o dia com a gente brincando e socializando. Ideal para quem trabalha fora de casa.</p>
+      <div class="serv-price">A partir de R$ 40/dia</div>
+      <span class="serv-badge">Cães até 15kg</span>
+    </div>
+    <div class="serv-card">
+      <span class="serv-icon">🛍️</span>
+      <h3>Pet Shop</h3>
+      <p>Rações premium, petiscos, brinquedos, acessórios, roupinhas e produtos de higiene das melhores marcas.</p>
+      <div class="serv-price">Veja nosso catálogo</div>
+      <span class="serv-badge">Entrega disponível</span>
+    </div>
+    <div class="serv-card">
+      <span class="serv-icon">💅</span>
+      <h3>Estética Pet</h3>
+      <p>Coloração, hidratação do pelo, spa para pets, corte personalizado e muito mais para deixar seu pet estiloso.</p>
+      <div class="serv-price">A partir de R$ 80</div>
+      <span class="serv-badge">Com agendamento</span>
+    </div>
+  </div>
+</section>
+
+<section class="banho-tosa" id="precos">
+  <span class="section-tag">🛁 Tabela de preços</span>
+  <h2>Banho & Tosa por porte</h2>
+  <p class="sub">Valores por porte do animal. Raças com pelos especiais podem ter acréscimo.</p>
+  <div class="bt-table-wrap">
+    <table>
+      <thead>
+        <tr><th>Porte</th><th>Raças (exemplos)</th><th>Banho Simples</th><th>Banho + Tosa</th><th>Tosa Higiênica</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-size">🐩 Pequeno</td><td>Poodle, Lhasa, Shih Tzu</td><td class="td-price">R$ 45</td><td class="td-price">R$ 75</td><td class="td-price">R$ 35</td></tr>
+        <tr><td class="td-size">🐕 Médio</td><td>Cocker, Beagle, Schnauzer</td><td class="td-price">R$ 65</td><td class="td-price">R$ 100</td><td class="td-price">R$ 45</td></tr>
+        <tr><td class="td-size">🦮 Grande</td><td>Labrador, Golden, Border</td><td class="td-price">R$ 90</td><td class="td-price">R$ 140</td><td class="td-price">R$ 60</td></tr>
+        <tr><td class="td-size">🐕‍🦺 Extra Grande</td><td>Rottweiler, Pastor Alemão</td><td class="td-price">R$ 130</td><td class="td-price">R$ 190</td><td class="td-price">R$ 80</td></tr>
+        <tr><td class="td-size">🐈 Gato</td><td>Todas as raças</td><td class="td-price">R$ 70</td><td class="td-price">R$ 110</td><td class="td-price">R$ 50</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="veterinario" id="veterinario">
+  <span class="section-tag">🏥 Clínica Veterinária</span>
+  <h2>Saúde e bem-estar do seu pet</h2>
+  <p class="sub">Nossa clínica conta com veterinários experientes e equipamentos modernos para cuidar do seu animal.</p>
+  <div class="vet-content">
+    <div class="vet-info">
+      <div class="vet-item">
+        <span class="vet-item-icon">💉</span>
+        <div><h4>Vacinação</h4><p>Carteira de vacinação em dia, com vacinas importadas e controle rigoroso de qualidade.</p></div>
+      </div>
+      <div class="vet-item">
+        <span class="vet-item-icon">🔬</span>
+        <div><h4>Exames & Diagnóstico</h4><p>Hemograma, ultrassom, raio-X e demais exames com resultado rápido.</p></div>
+      </div>
+      <div class="vet-item">
+        <span class="vet-item-icon">💊</span>
+        <div><h4>Internação & Cirurgias</h4><p>Estrutura completa para internação e procedimentos cirúrgicos com equipe especializada.</p></div>
+      </div>
+      <div class="vet-item">
+        <span class="vet-item-icon">🆘</span>
+        <div><h4>Emergências</h4><p>Plantão emergencial via WhatsApp. Porque a saúde do seu pet não tem hora.</p></div>
+      </div>
+    </div>
+    <div class="vet-cta">
+      <span style="font-size:3rem">🏥</span>
+      <h3>Consulta Veterinária</h3>
+      <p>Avaliação completa do seu pet com emissão de receita, orientações e acompanhamento.</p>
+      <div class="vet-price-tag">R$ 120</div>
+      <button class="btn-teal" onclick="openChat()" style="width:100%">Agendar Consulta</button>
+      <p style="font-size:.78rem;color:var(--gray);margin-top:14px">Retorno em até 30 dias: gratuito</p>
+    </div>
+  </div>
+</section>
+
+<section class="depoimentos" id="depoimentos">
+  <span class="section-tag">💛 Depoimentos</span>
+  <h2>Quem ama, recomenda</h2>
+  <div class="dep-grid">
+    <div class="dep-card">
+      <span class="dep-pet">🐩</span>
+      <div class="stars">★★★★★</div>
+      <p>O meu Lulu sai da PetAmor renovado! A tosa é impecável e os funcionários tratam ele com tanto carinho que ele mal quer vir embora. Super recomendo!</p>
+      <div class="dep-author">
+        <div class="dep-avatar">C</div>
+        <div><div class="dep-name">Carla Mendes</div><div class="dep-pet-name">Tutora do Lulu (Poodle)</div></div>
+      </div>
+    </div>
+    <div class="dep-card">
+      <span class="dep-pet">🐈</span>
+      <div class="stars">★★★★★</div>
+      <p>Minha gatinha Mel é super estressada e nunca aceitou banho em outro lugar. Aqui elas têm um jeito especial com os gatos. Equipe muito atenciosa!</p>
+      <div class="dep-author">
+        <div class="dep-avatar">P</div>
+        <div><div class="dep-name">Pedro Alves</div><div class="dep-pet-name">Tutor da Mel (Persa)</div></div>
+      </div>
+    </div>
+    <div class="dep-card">
+      <span class="dep-pet">🦮</span>
+      <div class="stars">★★★★★</div>
+      <p>Deixei meu Golden no hotel por 15 dias enquanto viajei. Recebi fotos todo dia, ele estava feliz e super bem cuidado. Nunca mais vou usar outro lugar!</p>
+      <div class="dep-author">
+        <div class="dep-avatar">R</div>
+        <div><div class="dep-name">Renata Costa</div><div class="dep-pet-name">Tutora do Thor (Golden)</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contato" id="contato">
+  <span class="section-tag" style="color:rgba(255,255,255,.8)">📍 Fale conosco</span>
+  <h2>Agende agora</h2>
+  <p class="sub">Respondemos rápido pelo WhatsApp ou pelo formulário abaixo.</p>
+  <div class="contato-grid">
+    <div class="contact-info">
+      <div class="contact-item">
+        <span class="contact-icon">📍</span>
+        <div><strong>Endereço</strong><span>Rua dos Girassóis, 542 — Vila Nova<br/>São Paulo, SP</span></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">📞</span>
+        <div><strong>WhatsApp</strong><span>(11) 97777-0000</span></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">🕐</span>
+        <div><strong>Funcionamento</strong><span>Seg a Sex: 8h às 18h<br/>Sábado: 8h às 14h</span></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">🆘</span>
+        <div><strong>Emergências Veterinárias</strong><span>Via WhatsApp 24h</span></div>
+      </div>
+    </div>
+    <form onsubmit="handleForm(event)">
+      <input type="text" placeholder="Seu nome" required />
+      <input type="tel" placeholder="WhatsApp" required />
+      <input type="text" placeholder="Nome e raça do seu pet" required />
+      <select required>
+        <option value="" disabled selected>Serviço desejado</option>
+        <option>Banho & Tosa</option>
+        <option>Consulta Veterinária</option>
+        <option>Hotel Pet</option>
+        <option>Creche Pet</option>
+        <option>Estética Pet</option>
+        <option>Pet Shop</option>
+      </select>
+      <button type="submit" class="btn-teal" style="border-radius:10px">Agendar Serviço 🐾</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 <span>PetAmor</span> — Pet Shop & Clínica Veterinária. Feito com 💚 para pets e tutores.</p>
+</footer>
+
+<a class="whatsapp-btn" href="https://wa.me/5511977770000?text=Olá! Quero agendar um serviço na PetAmor 🐾" target="_blank">💬</a>
+
+<button class="chat-toggle" onclick="openChat()">🐾</button>
+<div class="chat-box" id="chatBox">
+  <div class="chat-header">
+    <div class="chat-avatar">🐾</div>
+    <div class="chat-header-info">
+      <strong>Patinha — Assistente PetAmor</strong>
+      <span>PetAmor Pet Shop • Online</span>
+    </div>
+    <span class="online-dot"></span>
+  </div>
+  <div class="chat-msgs" id="chatMsgs">
+    <div class="msg bot">Olá! 🐶🐱 Sou a <strong>Patinha</strong>, assistente virtual da PetAmor!<br/>Como posso ajudar você e seu pet hoje?</div>
+  </div>
+  <div class="quick-replies" id="quickReplies">
+    <button class="qr-btn" onclick="qr('Quero agendar banho e tosa')">Banho & Tosa</button>
+    <button class="qr-btn" onclick="qr('Consulta veterinária')">Veterinário</button>
+    <button class="qr-btn" onclick="qr('Hotel ou creche pet')">Hotel/Creche</button>
+    <button class="qr-btn" onclick="qr('Qual o preço?')">Ver preços</button>
+  </div>
+  <div class="chat-footer">
+    <input type="text" id="chatInput" placeholder="Digite sua mensagem..." onkeydown="if(event.key==='Enter') sendMsg()" />
+    <button onclick="sendMsg()">➤</button>
+  </div>
+</div>
+
+<script>
+  const respostas = {
+    'quero agendar banho e tosa': '🛁 Nossos preços de banho e tosa:\n\n🐩 Pequeno: R$ 45 / R$ 75 c/ tosa\n🐕 Médio: R$ 65 / R$ 100 c/ tosa\n🦮 Grande: R$ 90 / R$ 140 c/ tosa\n🐈 Gato: R$ 70 / R$ 110 c/ tosa\n\nQual o porte e raça do seu pet?',
+    'consulta veterinária': '🏥 Consulta Veterinária:\n\n💰 Valor: R$ 120\n📋 Inclui: avaliação completa, receita e orientações\n✅ Retorno em 30 dias: gratuito\n🆘 Emergências via WhatsApp 24h\n\nQuer agendar?',
+    'hotel ou creche pet': '🏨 Hotel Pet: a partir de R$ 60/dia\nInclui alimentação, passeios e fotos diárias!\n\n🎒 Creche Pet: a partir de R$ 40/dia\nIdeal para quem trabalha fora!\n\nQuer mais informações ou quer agendar?',
+    'qual o preço?': '💰 Nossos principais serviços:\n\n🛁 Banho simples: a partir de R$ 45\n✂️ Banho + tosa: a partir de R$ 75\n🏥 Consulta vet: R$ 120\n🏨 Hotel pet: a partir de R$ 60/dia\n🎒 Creche: a partir de R$ 40/dia\n\nQuer agendar algum serviço?',
+  };
+
+  function openChat() {
+    document.getElementById('chatBox').classList.toggle('open');
+  }
+
+  function addMsg(text, type) {
+    const msgs = document.getElementById('chatMsgs');
+    const div = document.createElement('div');
+    div.className = `msg ${type}`;
+    div.innerHTML = text.replace(/\n/g, '<br/>');
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function qr(text) {
+    addMsg(text, 'user');
+    document.getElementById('quickReplies').innerHTML = '';
+    setTimeout(() => {
+      const key = text.toLowerCase();
+      const resp = respostas[key] || 'Que fofo! 🐾 Para te ajudar melhor, fala com a gente no WhatsApp ou preenche o formulário de agendamento!';
+      addMsg(resp, 'bot');
+      setTimeout(() => addMsg('👇 <a href="https://wa.me/5511977770000" target="_blank" style="color:#2a9d8f">Clique para falar no WhatsApp</a>', 'bot'), 600);
+    }, 700);
+  }
+
+  function sendMsg() {
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text) return;
+    addMsg(text, 'user');
+    input.value = '';
+    document.getElementById('quickReplies').innerHTML = '';
+    setTimeout(() => {
+      addMsg('Entendido! 🐾 Para agendar ou tirar dúvidas, fala com a gente no WhatsApp. Respondemos rapidinho!', 'bot');
+    }, 700);
+  }
+
+  function handleForm(e) {
+    e.preventDefault();
+    alert('Agendamento solicitado! 🐾\nEntraremos em contato em breve para confirmar. Seu pet vai adorar!');
+  }
+</script>
+</body>
+</html>
